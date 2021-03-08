@@ -1,5 +1,5 @@
 const express = require("express");
-const { csrfProtection, asyncHandler } = require("../utils");
+const { csrfProtection, asyncHandler, userValidator } = require("../utils");
 const db = require("../db/models");
 
 const router = express.Router();
@@ -9,6 +9,7 @@ router.get("/register", csrfProtection, function (req, res, next) {
   const user = db.User.build();
   res.render("user-register", {
     title: "Register",
+    user,
     csrfToken: req.csrfToken(),
   });
 });
