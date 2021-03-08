@@ -30,11 +30,17 @@ const userValidator = [
         .withMessage('Password cannot exceed 255 characters')
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, 'g')
         .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, and number'),
-        
-        
-        
+];
 
 
+const loginValidators = [
+    check('email')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide an email address'),
+    check('password')
+        .exists({ checkFalsy: true})
+        .withMessage('Please provide a password'),
+];
 
-]
-module.exports = { csrfProtection, asyncHandler }
+
+module.exports = { csrfProtection, asyncHandler, userValidator, loginValidators }
