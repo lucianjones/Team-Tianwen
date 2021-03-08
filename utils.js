@@ -9,14 +9,22 @@ const userValidator = [
         .exists({ checkFalsy: true })
         .withMessage('Please provide a username')
         .isLength({ max: 20 })
-        .withMessage('Username cannot exceed twenty characters'),
+        .withMessage('Username cannot exceed twenty characters')
+        .custom((value) => {
+            return db.User.findOne({where: {username: value}})
+                .then((user) => {
+                    if(user) {
+                        return Promise.reject('This username is already in use')
+                    }
+                })
+        }),
     check('email')
         .exists({ checkFalsy: true })
         .withMessage('Please provide an email address')
         .isEmail()
         .withMessage('Please provide a valid email address')
         .custom((value) => {
-            return db.User.findOne({ where: { email: value } }) 
+            return db.User.findOne({ where: { email: value } })
                 .then((user) => {
                     if (user) {
                         return Promise.reject('This email address is already in use')

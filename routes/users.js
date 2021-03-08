@@ -1,7 +1,7 @@
 const express = require("express");
 const { csrfProtection, asyncHandler, userValidator, loginValidators } = require("../utils");
 const db = require("../db/models");
-const validationResult = require('express-validator');
+const {check, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { login, logout } = require('../auth');
 
@@ -71,13 +71,13 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 
       if (passwordMatch) {
         login(req,res,user);
-        return res.redirect('/users/:id');
+        return
       }
     }
 
     errors.push('Login failed for the provided email address and password');
   } else {
-    errors = validatorErros.array().map((error) => error.msg);
+    errors = validatorErrors.array().map((error) => error.msg);
   }
 
   res.render('user-login', {

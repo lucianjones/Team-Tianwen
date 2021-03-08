@@ -1,0 +1,17 @@
+extends layout
+block content
+  div test
+    if errors
+      each error in errors
+        li=error
+    form(action="/users/register", method="post")
+        input(type="hidden", name='_csrf', value=csrfToken)
+        label(for="username") Username
+        input(type="text", name='username')
+        label(for="email") Email
+        input(type="email", name='email')
+        label(for="password") Password
+        input(type="password", name='password')
+        label(for="confirmPassword") confirm Password
+        input(type='password', name='confirmPassword')
+        button(type="submit") Submit
