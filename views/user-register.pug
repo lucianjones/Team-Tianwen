@@ -2,6 +2,7 @@ extends layout
 append head 
   link(rel="stylesheet" href="/stylesheets/user-register.css")
 block content
+  div(id="outer-div")
     div(id='register-errors')
       if errors
         each error in errors
@@ -14,11 +15,13 @@ block content
       form(action="/users/register", method="post" id='user-register__form')
           input(type="hidden", name='_csrf', value=csrfToken)
           label(for="username" class='register-labels') Username
-          input(type="text", name='username' class='register-inputs')
+          input(type="text", name='username' class='register-inputs', value=user.username)
           label(for="email" class='register-labels') Email
-          input(type="email", name='email' class='register-inputs')
+          input(type="email", name='email' class='register-inputs', value=user.email)
           label(for="password" class='register-labels') Password
           input(type="password", name='password' class='register-inputs')
           label(for="confirmPassword" class='register-labels') Confirm Password
           input(type='password', name='confirmPassword' class='register-inputs')
           button(type="submit" id='register-button') Submit
+    div(id="login") Already have an account?
+      a(href="/users/login")  Log in 

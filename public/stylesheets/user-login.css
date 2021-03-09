@@ -9,24 +9,24 @@ body {
     align-items: center;
 }
 
-#register-main-div {
+#login-main-div {
+    flex-direction: column;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     /* position: absolute; */
-    top: 150px;
-    left: 10%;
+    top: 300px;
 }
 
-#user-register__form {
+#user-login__form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     position: relative;
     background-color: white;
     width: 260px;
-    height: 400px;
+    height: 200px;
     border-radius: 2%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -37,13 +37,13 @@ body {
     
 }
 
-.register-labels {
+.login-labels {
     padding-bottom: 2px;
     padding-top: 12px;
 }
 
 
-#register-button {
+#login-button {
     margin-top: 20px;
     background-color: #52b7f2;
     border-radius: 4px;
@@ -53,7 +53,7 @@ body {
     color: white;
 }
 
-#register-list {
+#login-list {
     position: relative;
     margin-right: 30px;
     font-size: 30px;
@@ -61,14 +61,13 @@ body {
     
 }
 
-.register-list__item { 
+.login-list__item { 
     font-size: 12px;
     padding-top: 12px;
 }
 
-#register-errors {
+#login-errors {
     position: relative;
-    left: 10%;
     list-style-type: none;
     top: 100px;
 
@@ -80,15 +79,12 @@ body {
     padding: 2px;
 }
 
-#login {
+#signup {
     padding: 10px;
     font-size: 12px;
-    position: relative;
-    left: 31%;
-    top: 147px;
 }
 
-#login > a {
+#signup > a {
     font-size: 12px;
     text-decoration: none;
     color:#52b7f2;
