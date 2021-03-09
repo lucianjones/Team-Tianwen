@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const questionRouter = require('./routes/questions')
 const app = express();
-
+const { restore } = require('./auth')
 // view engine setup
 app.set('view engine', 'pug');
 
@@ -33,6 +33,7 @@ app.use(
   })
 );
 
+app.use(restore)
 // create Session table if it doesn't already exist
 store.sync();
 
