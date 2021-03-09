@@ -1,0 +1,18 @@
+extend layout
+
+block content
+ div
+    if errors
+      each error in errors
+        li=error
+    form(action="/questions/ask", method="post")
+        input(type="hidden", name='_csrf', value=csrfToken)
+        label(for="title") Title
+        input(type="text", name='title')
+        label(for="description") Description
+        textarea(name='description')
+        if error
+          button(type="submit") Review your question
+        else
+          button(type="submit") Post your question
+        button(type="reset") Discard your questoin
