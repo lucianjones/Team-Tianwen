@@ -77,6 +77,18 @@ router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, 
   }
 }))
 
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async(req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await db.Question.findByPk(questionId);
+  res.render('question-edit', {question, csfToken: req.csrfToken()})
+}))
+
+router.post('/:id(\\d+)/edit', csrfProtection, questionValidator, asyncHandler(async(req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await db.Question.findByPk(questionId);
+
+
+}))
 
 
 
