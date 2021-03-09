@@ -1,12 +1,11 @@
 extends layout
-block content
 
+include utils.pug
+
+block content
+  +validationErrorSummary(errors)
   form(action=`/questions/${question.id}/edit`, method="post")
-    input(type="hidden", name='_csrf', value=csrfToken)
-    label(for="title") Title
-    input(type="text", name='title')
-    label(for="description") Description
-    textarea(name='description')
+    include question-form-fields.pug
     if error
       button(type="submit") Review your question
     else

@@ -1,0 +1,5 @@
+include utils.pug
+
+input(type='hidden' name='_csrf' value=csrfToken)
++field('Title','title', question.title,'text')
++field('Description','description', question.description,'textarea')
