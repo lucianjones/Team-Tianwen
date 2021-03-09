@@ -1,17 +1,16 @@
 extends layout
+include utils
 block content
-  div test
-    if errors
-      each error in errors
-        li=error
+  div
+    +validationErrorSummary(errors)
     form(action="/users/register", method="post")
         input(type="hidden", name='_csrf', value=csrfToken)
-        label(for="username") Username
-        input(type="text", name='username')
-        label(for="email") Email
-        input(type="email", name='email')
-        label(for="password") Password
-        input(type="password", name='password')
-        label(for="confirmPassword") confirm Password
-        input(type='password', name='confirmPassword')
-        button(type="submit") Submit
+        +field('Username', 'username', user.username)
+        +field('Email', 'email', user.email)
+        +field('Password', 'password', '' , 'password')
+        +field('Confirm Password', 'confirmPassword', '' , 'password')
+        div
+          button(type="submit") Register
+          a(href='/questions') Cancel
+        div
+          p: a(href='/users/login') Already have an account?
