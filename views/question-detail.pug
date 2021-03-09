@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h3= question.title
+  div
+    p= question.description
+    a(href=`/questions/${question.id}/edit`) edit

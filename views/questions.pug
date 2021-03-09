@@ -1,0 +1,13 @@
+extends layout
+block content
+  div
+    a(href="/questions/ask" role='button') Ask Question
+  table
+    thead
+      tr
+        th(scope='col') Questions
+    tbody
+      each question in questions
+        tr
+          td
+            a(href=`/questions/${question.id}`)=question.title

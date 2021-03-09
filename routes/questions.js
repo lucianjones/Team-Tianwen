@@ -6,6 +6,18 @@ const { csrfProtection, asyncHandler } = require('../utils');
 
 const router = express.Router();
 
+router.get('/', asyncHandler(async(req, res) => {
+  const questions = await db.Question.findAll({
+    limit: 10
+  })
+  res.render('questions', {questions})
+}))
+
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await db.Question.findByPk(questionId);
+  res.render('question-detail', {question})
+}))
 
 router.get("/ask", csrfProtection, function (req,res, next) {
   console.log(req.session.auth)
