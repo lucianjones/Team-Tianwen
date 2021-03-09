@@ -1,0 +1,13 @@
+extends layout
+
+include utils.pug
+
+block content
+  +validationErrorSummary(errors)
+  form(action=`/questions/${question.id}/edit`, method="post")
+    include question-form-fields.pug
+    if error
+      button(type="submit") Review your question
+    else
+      button(type="submit") Update your question
+    a(href=`/questions/${question.id}`) Cancel
