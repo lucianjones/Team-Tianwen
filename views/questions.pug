@@ -6,7 +6,10 @@ block content
     div.center__container
       h1.header(scope='col') All Questions
       div.questionButton
-        a.question-btn(href="/questions/ask" role='button') Ask Question
+        if(authenticated)
+          a.question-btn(href="/questions/ask" role='button') Ask Question
+        else
+          a.question-btn(href="/users/login") login to ask questions
     each question in questions
       div.question-div
         a.question(href=`/questions/${question.id}`)=question.title

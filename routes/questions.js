@@ -81,11 +81,22 @@ router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, 
     res.redirect(`/questions`)
   }
   else {
-    const errors = validErrors.array().map((error) => error.msg);
+    const errors = validErrors.array().map((error) => error.param);
+    if (errors.includes("title")) {
+      const titleError = errors.indexOf('title');
+      var titleErr = validErrors.array()[titleError].msg
+    }
+    if (errors.includes("description")) {
+      const descriptionError = errors.indexOf('description');
+      var descriptionErr = validErrors.array()[descriptionError].msg
+    }
+
     res.render('question-add', {
       title,
       description,
       errors,
+      titleErr,
+      descriptionErr,
       csrfToken: req.csrfToken(),
     });
   }
@@ -107,7 +118,7 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async(req, res) => {
 router.post('/:id(\\d+)/edit', csrfProtection, questionValidator, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const questionToUpdate = await db.Question.findByPk(questionId);
-  
+
   if (req.session.auth.userId !== questionToUpdate.userId) {
     const error = new Error('You are not the question owner')
     const errors = [error]
@@ -127,18 +138,26 @@ router.post('/:id(\\d+)/edit', csrfProtection, questionValidator, asyncHandler(a
   }
 
   const validatorErrors = validationResult(req);
-  console.log(validatorErrors)
   if (validatorErrors.isEmpty()) {
-    console.log('updated')
     await questionToUpdate.update(question);
     res.redirect(`/questions/${questionId}`);
   }
   else {
-    const errors = validatorErrors.array().map((error) => error.msg);
-    console.log('1')
+    const errors = validatorErrors.array().map((error) => error.param);
+    if (errors.includes("title")) {
+      const titleError = errors.indexOf('title');
+      var titleErrr = validatorErrors.array()[titleError].msg
+    }
+    if (errors.includes("description")) {
+      const descriptionError = errors.indexOf('description');
+      var descriptionErrr = validatorErrors.array()[descriptionError].msg
+    }
+
     res.render('question-edit', {
       question: { ...question, id: questionId},
       errors,
+      titleErrr,
+      descriptionErrr,
       csrfToken: req.csrfToken(),
     });
   }
@@ -185,7 +204,7 @@ const answerValidator = [
 router.post('/:id(\\d+)/answer', csrfProtection, answerValidator, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10)
   const question = await db.Question.findByPk(questionId);
-  
+
   if (!req.session.auth) {
     const error = new Error('You must login to answer a question')
     const errors = [error]

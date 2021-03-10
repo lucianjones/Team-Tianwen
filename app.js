@@ -13,7 +13,6 @@ const questionRouter = require('./routes/questions')
 const { requireAuth, restore } = require('./auth')
 
 const app = express();
-const { restore } = require('./auth')
 // view engine setup
 app.set('view engine', 'pug');
 
