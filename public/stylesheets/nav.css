@@ -8,25 +8,23 @@
   height: 65px; */
   list-style: none;
   padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 .navbar a {
   float:left;
-  display:flex;
   color: black;
-  text-align: center;
   padding: 14px 16px;
   background-color: #fafafb;
   text-decoration: none;
   border-radius: 1000px;
 }
 .searchbar{
-  width:500px;
+  width:60%;
   height:39px;
   padding: 6px;
   margin-top: 8px;
-  margin-left: 350px;
   font-size: 100%;
-
 }
 .navbar .login{
   margin-right: 10px;
@@ -57,4 +55,18 @@
   padding: .8em;
   margin-top: 8px;
   margin-left: 4px;
+}
+
+@media screen and (max-width: 1130px) {
+  .navbar {
+    margin: auto;
+    display: block;
+  }
+  a.logo{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1131px) {
+
 }

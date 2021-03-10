@@ -1,13 +1,11 @@
 extends layout
+append head
+  link(rel="stylesheet" href="/stylesheets/question-page.css")
 block content
-  div
-    a(href="/questions/ask" role='button') Ask Question
-  table
-    thead
-      tr
-        th(scope='col') Questions
-    tbody
-      each question in questions
-        tr
-          td
-            a(href=`/questions/${question.id}`)=question.title
+  div.container
+    div.center__container
+      h1.header(scope='col') All Questions
+      a.question-btn(href="/questions/ask" role='button') Ask Question
+    each question in questions
+      div.question-div
+        a.question(href=`/questions/${question.id}`)=question.title

@@ -1,0 +1,27 @@
+.container {
+  border: 1px solid red;
+
+}
+
+.center__container {
+  border: 1px solid green;
+  display: flex;
+  justify-content: space-around;
+}
+
+.question-btn {
+  display: flex;
+  border: 1px solid blue;
+  order: 1;
+}
+
+.question-div {
+  display: flex;
+  justify-content: center;
+}
+
+a.question {
+  color: #0077cc;
+  font-size: 16px;
+  font-weight: 400;
+}
