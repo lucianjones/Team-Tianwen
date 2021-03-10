@@ -1,8 +1,17 @@
 extends layout
-
+append head
+  link(rel="stylesheet" href="/stylesheets/question-detail-page.css")
 block content
-  h3= question.title
-  div
-    p= question.description
-    a(href=`/questions/${question.id}/edit`) edit
-    a( href=`/questions/${question.id}/delete`) Delete Question
+  div.heading-container
+    h3.header= question.title
+    div.questionButton
+      a.question-btn(href="/questions/ask" role='button') Ask Question
+  div.question-div
+    p.description= question.description
+    .center
+      .editbuttons
+        a.edit-btn(href=`/questions/${question.id}/edit`) Edit
+        a.edit-btn( href=`/questions/${question.id}/delete`) Delete
+
+  //- div
+  //-   p Add Answer question button and answer form
