@@ -4,12 +4,12 @@
   border: 1px solid #e7e7e7;
   position: sticky ;
   top: 0px;
-  /* z-index: 1;
-  height: 65px; */
+   z-index: 1;
   list-style: none;
   padding-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  border-top: 6px solid #0095ff;
 }
 .navbar a {
   float:left;

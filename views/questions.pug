@@ -5,7 +5,9 @@ block content
   div.container
     div.center__container
       h1.header(scope='col') All Questions
-      a.question-btn(href="/questions/ask" role='button') Ask Question
+      div.questionButton
+        a.question-btn(href="/questions/ask" role='button') Ask Question
     each question in questions
       div.question-div
         a.question(href=`/questions/${question.id}`)=question.title
+        p.description=question.description
