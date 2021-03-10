@@ -13,15 +13,22 @@ router.get('/', asyncHandler(async(req, res) => {
   res.render('questions', {questions})
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const question = await db.Question.findByPk(questionId);
-  res.render('question-detail', {question})
+  const answers = await db.Answer.findAll({where: {questionId}})
+  res.render('question-detail', {question, answers,  csrfToken: req.csrfToken()})
 }))
 
 router.get("/ask", csrfProtection, function (req,res, next) {
   console.log(req.session.auth)
   console.log('hello')
+  if (!req.session.auth) {
+    const error = new Error('You must login to ask a question')
+    const errors = [error]
+    res.render('question', {
+      errors,
+    })}
   const question = db.Question.build();
   res.render('question-add', {
     csrfToken: req.csrfToken(),
@@ -49,6 +56,12 @@ const questionValidator = [
 router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, res) => {
   console.log(req.session.auth)
   console.log("bye")
+  if (!req.session.auth) {
+    const error = new Error('You must login to ask a question')
+    const errors = [error]
+    res.render('question', {
+      errors,
+    })}
   const {
     title,
     description,
@@ -64,7 +77,7 @@ router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, 
 
   if(validErrors.isEmpty()) {
     await question.save();
-    res.redirect('/question/:id')
+    res.redirect(`/questions`)
   }
   else {
     const errors = validErrors.array().map((error) => error.msg);
@@ -80,12 +93,27 @@ router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, 
 router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const question = await db.Question.findByPk(questionId);
+  if (req.session.auth.userId !== question.userId) {
+    const error = new Error('You are not the question owner')
+    const errors = [error]
+    res.render('question-detail', {
+      question,
+      errors,
+    })}
   res.render('question-edit', {question, csrfToken: req.csrfToken()})
 }))
 
 router.post('/:id(\\d+)/edit', csrfProtection, questionValidator, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const questionToUpdate = await db.Question.findByPk(questionId);
+  
+  if (req.session.auth.userId !== questionToUpdate.userId) {
+    const error = new Error('You are not the question owner')
+    const errors = [error]
+    res.render('question-detail', {
+      question,
+      errors,
+    })}
 
   const {
     title,
@@ -113,12 +141,18 @@ router.post('/:id(\\d+)/edit', csrfProtection, questionValidator, asyncHandler(a
       csrfToken: req.csrfToken(),
     });
   }
-
 }));
 
 router.get('/:id(\\d+)/delete', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const question = await db.Question.findByPk(questionId);
+  if (req.session.auth.userId !== question.userId) {
+    const error = new Error('You are not the question owner')
+    const errors = [error]
+    res.render('question-detail', {
+      question,
+      errors,
+    })}
   res.render('question-delete', {
     question,
     csrfToken: req.csrfToken()
@@ -128,14 +162,64 @@ router.get('/:id(\\d+)/delete', csrfProtection, asyncHandler(async(req, res) => 
 router.post('/:id(\\d+)/delete', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const questionToDelete = await db.Question.findByPk(questionId);
+  if (req.session.auth.userId !== questionToDelete.userId) {
+    const error = new Error('You are not the question owner')
+    const errors = [error]
+    res.render('question-detail', {
+      question,
+      errors,
+    })}
   await questionToDelete.destroy();
   res.redirect('/questions');
 }));
 
+const answerValidator = [
+  check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Please fill out an answer')
+    .isLength({ max: 500 })
+    .withMessage('Answer must be shorter than 2000 characters')
+]
 
+router.post('/:id(\\d+)/answer', csrfProtection, answerValidator, asyncHandler(async(req, res) => {
+  const questionId = parseInt(req.params.id, 10)
+  const question = await db.Question.findByPk(questionId);
+  
+  if (!req.session.auth) {
+    const error = new Error('You must login to answer a question')
+    const errors = [error]
+    res.render('question-detail', {
+      question,
+      errors,
+    })
+  }
+  const {
+    description
+  } = req.body
+  console.log(description)
 
+  const userId = req.session.auth.userId
 
+  const answer = db.Answer.build({
+    description,
+    userId,
+    questionId,
+  })
 
+  const validatorErrors = validationResult(req)
+
+  if (validatorErrors.isEmpty()) {
+    await answer.save()
+    res.redirect(`/questions/${questionId}`)
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg);
+    res.render('question-detail', {
+      question,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  }}
+))
 
 
 module.exports = router;

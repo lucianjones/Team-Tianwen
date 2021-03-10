@@ -1,8 +1,26 @@
 extends layout
-
+append head
+  script(src="/javascripts/editAnswer.js" type="module")
 block content
   h3= question.title
   div
     p= question.description
     a(href=`/questions/${question.id}/edit`) edit
     a( href=`/questions/${question.id}/delete`) Delete Question
+  h4 Answers 
+    div 
+      form(method="post" action=`/questions/${question.id}/answer`)
+        input(type="hidden", name='_csrf', value=csrfToken)
+        label(for="description")
+        input(type="text" name="description") 
+        button(type="submit") submit
+    div
+    if errors
+      each error in errors
+        li=error
+    div 
+      if answers  
+        each answer in answers 
+          li(id=`answer${answers.indexOf(answer)}` contenteditable='false')= answer.description
+          if user && answer.userId === user.id
+            button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
