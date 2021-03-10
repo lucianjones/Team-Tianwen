@@ -19,8 +19,10 @@ block content
       each error in errors
         li=error
     div 
+      meta(name='csrf-token' content=csrfToken)
       if answers  
         each answer in answers 
-          li(id=`answer${answers.indexOf(answer)}` contenteditable='false')= answer.description
-          if user && answer.userId === user.id
-            button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
+          li(id=`answer${answers.indexOf(answer)}` contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
+            if user && answer.userId === user.id
+              button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
+              button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete

@@ -16,7 +16,7 @@ router.get('/', asyncHandler(async(req, res) => {
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const question = await db.Question.findByPk(questionId);
-  const answers = await db.Answer.findAll({where: {questionId}})
+  const answers = await db.Answer.findAll({where: {questionId}, order: ['createdAt']})
   res.render('question-detail', {question, answers,  csrfToken: req.csrfToken()})
 }))
 
@@ -220,6 +220,25 @@ router.post('/:id(\\d+)/answer', csrfProtection, answerValidator, asyncHandler(a
     });
   }}
 ))
+
+
+router.patch('/:qid(\\d+)/answer/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const answer = await db.Answer.findByPk(id);
+  const {description} = req.body
+  console.log(description)
+  const edit = {description}
+  await answer.update(edit)
+  res.json({message: 'success'})
+}));
+
+
+router.delete('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const answer = await db.Answer.findByPk(id);
+  await answer.destroy();
+  res.json({ message: 'success' })
+}))
 
 
 module.exports = router;
