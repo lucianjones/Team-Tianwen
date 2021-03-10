@@ -1,17 +1,61 @@
 'use strict';
+const faker = require('faker');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Users', [
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: faker.internet.userName(),
+        hashedPassword: await bcrypt.hash(faker.internet.password(), 10),
+        email: faker.internet.email(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+    ], {});
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
   },
 
   down: (queryInterface, Sequelize) => {
