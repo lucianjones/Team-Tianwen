@@ -50,10 +50,12 @@ justify-content: center;
   padding-top: 20px;
 }
 
-button{
-background-color: red;
-height:100px;
-width:100px;
+.showMore{
+background-color: #0095ff;
+color:white;
+font-size: 16px;
+margin: 10px 0 10px 49%;
+width: 100px;
 }
 /* style Ask Question button */
 

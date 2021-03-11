@@ -10,7 +10,6 @@ router.get('/', asyncHandler(async(req, res) => {
   const questions = await db.Question.findAll({
     limit: 10
   })
-  console.log(questions)
   res.render('questions', {questions})
 }))
 
@@ -22,8 +21,6 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {
 }))
 
 router.get("/ask", csrfProtection, function (req,res, next) {
-  console.log(req.session.auth)
-  console.log('hello')
   if (!req.session.auth) {
     const error = new Error('You must login to ask a question')
     const errors = [error]
@@ -55,8 +52,6 @@ const questionValidator = [
 ];
 
 router.post("/ask", csrfProtection, questionValidator, asyncHandler(async (req, res) => {
-  console.log(req.session.auth)
-  console.log("bye")
   if (!req.session.auth) {
     const error = new Error('You must login to ask a question')
     const errors = [error]
@@ -216,7 +211,7 @@ router.post('/:id(\\d+)/answer', csrfProtection, answerValidator, asyncHandler(a
   const {
     description
   } = req.body
-  console.log(description)
+
 
   const userId = req.session.auth.userId
 
