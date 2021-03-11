@@ -1,18 +1,24 @@
 extends layout
 append head
+  script(src="/javascripts/showMore.js" type='module')
   link(rel="stylesheet" href="/stylesheets/question-page.css")
 block content
   div.entirePage
+    div.center__container
+      h1.header(scope='col') All Questions
+      div.questionButton
+        if(authenticated)
+          a.question-btn(href="/questions/ask" role='button') Ask Question
+        else
+          a.question-btn(href="/users/login") login to ask questions
     div.container
-      div.center__container
-        h1.header(scope='col') All Questions
-        div.questionButton
-          if(authenticated)
-            a.question-btn(href="/questions/ask" role='button') Ask Question
-          else
-            a.question-btn(href="/users/login") login to ask questions
       each question in questions
         div.question-div
           a.question(href=`/questions/${question.id}`)=question.title
           p.description=question.description
-    
+      each quest in nextQ
+        div.question-div
+          a.qquestion(href=`/questions/${quest.id}`)=quest.title
+          p.description=quest.description
+  div.showButton-container
+    button.showMore(type="submit") Show More
