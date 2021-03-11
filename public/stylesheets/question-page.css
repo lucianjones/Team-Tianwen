@@ -22,13 +22,13 @@
 }
 
 a.question {
-  display:flex;
   color: #0077cc;
   /* check font size and font weight */
   font-size: 16px;
   font-weight: 400;
-  position: absolute;
   text-decoration: none;
+  display:inline-block;
+  position:absolute;
 }
 
 .header {
@@ -50,13 +50,12 @@ justify-content: center;
   padding-top: 20px;
 }
 
-.showMore{
-background-color: #0095ff;
-color:white;
-font-size: 16px;
-margin: 10px 0 10px 49%;
-width: 100px;
-}
 /* style Ask Question button */
 
 /* style question div  */
+/* .container {
+  height: 1000px;
+  overflow: hidden;
+  border: 1px solid red;
+
+} */

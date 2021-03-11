@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get('/', asyncHandler(async(req, res) => {
   const questions = await db.Question.findAll({
-    limit: 10
   })
   res.render('questions', {questions})
 }))
