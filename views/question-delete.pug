@@ -1,11 +1,15 @@
 extends layout.pug
-
+append head
+  link(rel="stylesheet" href="/stylesheets/question-delete.css")
+  script(src="/javascripts/deleteQuestion.js" type="module")
 block content
-  h3= question.title
-  div
-    p Proceed with deleting this Question?
-  div
-    form(action=`/questions/${question.id}/delete/` method='post')
-      input(type='hidden' name='_csrf' value=csrfToken)
-      button( type='submit') Delete Question
-      a(href=`/questions/${question.id}` role='button') Cancel
+  div.container
+    p.ptitle Title:
+    h3.qtitle= question.title
+    div
+      p.doDelete Proceed with deleting this Question?
+    div
+      form.form(action=`/questions/${question.id}/delete/` method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        button.delete-btn( type='submit') Delete Question
+        a(href=`/questions/${question.id}` role='button') Cancel

@@ -253,7 +253,7 @@ router.patch('/:qid(\\d+)/answer/:id(\\d+)/edit', csrfProtection, asyncHandler(a
 }));
 
 
-router.delete('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, res) => {
+router.post('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id, 10)
   const answer = await db.Answer.findByPk(id);
   await answer.destroy();

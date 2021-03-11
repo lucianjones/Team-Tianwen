@@ -14,22 +14,22 @@ block content
         a.edit-btn(href=`/questions/${question.id}/edit`) Edit
         a.edit-btn( href=`/questions/${question.id}/delete`) Delete
         //- make buttons unavaiable if the question does not belong to user
-  h4 Answers
-    div
-      form(method="post" action=`/questions/${question.id}/answer`)
-        input(type="hidden", name='_csrf', value=csrfToken)
-        label(for="description")
-        input(type="text" name="description")
-        button(type="submit") submit
-    div
-    if errors
-      each error in errors
-        li=error
-    div
-      meta(name='csrf-token' content=csrfToken)
-      if answers
-        each answer in answers
-          li(id=`answer${answers.indexOf(answer)}` contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
-            if user && answer.userId === user.id
-              button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
-              button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
+    h4 Answers
+      div
+        form(method="post" action=`/questions/${question.id}/answer`)
+          input(type="hidden", name='_csrf', value=csrfToken)
+          label(for="description")
+          input(type="text" name="description")
+          button(type="submit") submit
+      div
+      if errors
+        each error in errors
+          li=error
+      div
+        meta(name='csrf-token' content=csrfToken)
+        if answers
+          each answer in answers
+            li(id=`answer${answers.indexOf(answer)}` contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
+              if user && answer.userId === user.id
+                button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
+                button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
