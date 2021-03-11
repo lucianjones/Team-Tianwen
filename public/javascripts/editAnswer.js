@@ -56,9 +56,10 @@ window.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const id = Number(button.id.slice(6))
             const answer = document.getElementById(`answer${id}`)
+            const div = document.getElementById(`div${id}`)
             deleteAnswer(`/questions/${answer.dataset.questionid}/answer/${answer.dataset.answerid}/delete`);
-            answer.innerHTML = '';
-            answer.remove();
+            div.innerHTML = '';
+            div.remove();
         })
     })
 
