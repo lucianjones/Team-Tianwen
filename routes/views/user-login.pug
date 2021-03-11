@@ -1,0 +1,19 @@
+extends layout
+append head 
+  link(rel="stylesheet" href="/stylesheets/user-login.css")
+block content
+  div(id="outer-div")
+    div(id='login-errors')
+      if errors
+        each error in errors
+          li(class='errors-li')=error
+    div(id='login-main-div')
+      form(action="/users/login", method="post" id='user-login__form')
+          input(type="hidden", name='_csrf', value=csrfToken)
+          label(for="email" class='login-labels') Email
+          input(type="email", name='email' class='login-inputs')
+          label(for="password" class='login-labels') Password
+          input(type="password", name='password' class='login-inputs')
+          button(type="submit" id='login-button') Submit
+      div(id="signup") Don't have an account?
+          a(href="/users/register")  Sign up

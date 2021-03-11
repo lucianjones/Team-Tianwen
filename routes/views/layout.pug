@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+      block head
+        title="Express Starter App"
+        link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
+  body
+    div.navbar
+      a.logo(href='/questions') QueueFloodLogo
+      //- still need to put picture for logo
+      input(type="text" class='searchbar' placeholder="Search..")
+      if(authenticated)
+        div.navbar--right
+          a.profilePic(href='/users') profilePic
+          //- when we have user page finished, have to include into the href
+      else
+        div.navbar--right
+          a.login(href='/users/login') login
+          a.signup(href='/users/register') signup
+
+    block content

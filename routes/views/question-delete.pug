@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+  h3= question.title
+  div
+    p Proceed with deleting this Question?
+  div
+    form(action=`/questions/${question.id}/delete/` method='post')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      button( type='submit') Delete Question
+      a(href=`/questions/${question.id}` role='button') Cancel

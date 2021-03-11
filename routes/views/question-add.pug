@@ -1,0 +1,40 @@
+extend layout
+append head
+  link(rel="stylesheet" href="/stylesheets/question-add.css")
+block content
+ div
+    form(action="/questions/ask", method="post")
+        input(type="hidden", name='_csrf', value=csrfToken)
+        div.askContainer
+          div.titleContainer
+            if titleErr
+              label(for="title") Title
+              p Be specific and imagine you're asking a question to another person
+              p.error=titleErr
+              div.titleText
+                input.redBorder(type="text", name='title', value=title)
+            else
+              label(for="title") Title
+              p Be specific and imagine you're asking a question to another person
+              div.titleText
+                input(type="text", name='title', value=title)
+          div.descriptionContainer
+            if descriptionErr
+              label(for="description") Description
+              p Include all the information someone would need to answer your question
+              p.error=descriptionErr
+              div.descriptionText
+                textarea.redBorder(name='description')=description
+            else
+              label(for="description") Description
+              p Include all the information someone would need to answer your question
+              div.descriptionText
+                textarea(name='description')=description
+        div.postButtons
+          if error
+            button(type="submit") Review your question
+          else
+            div.postQ
+              button(type="submit") Post your question
+                div.discard
+                  button(type="reset") Discard your question
