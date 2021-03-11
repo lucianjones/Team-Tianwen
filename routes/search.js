@@ -7,18 +7,23 @@ const { Op } = require("sequelize");
 const router = express.Router();
 
 // /search?q=(\\.+)
-router.get('/search?q=(\\.+)', asyncHandler(async(req, res) => {
-  const {query} = req.query.q
-  const newQuery = query.split('+')
-
+router.get('/search', asyncHandler(async(req, res) => {
+  const { search } = req.query
+  console.log(req.query)
+  const searchArr = search.split(' ')
+  const searchTerms = searchArr.map(term => {
+    return {title: {
+      [Op.iLike]:
+        '%'+term+'%'
+    }}
+  })
   const results = await db.Question.findAll({
     where: {
-      title: {
-      [Op.like]: '%' + newQuery + '%'
-      }
+      [Op.or]: searchTerms
     }
   })
-  res.render('search', {results})
+  console.log(results)
+  res.render('search', { results: results })
 }))
 
 // router.post('/search', asyncHandler(async(req, res) => {
