@@ -1,13 +1,34 @@
 extends layout
-
-include utils.pug
+append head
+  link(rel="stylesheet" href="/stylesheets/question-edit.css")
 
 block content
-  +validationErrorSummary(errors)
   form(action=`/questions/${question.id}/edit`, method="post")
-    include question-form-fields.pug
-    if error
-      button(type="submit") Review your question
-    else
-      button(type="submit") Update your question
-    a(href=`/questions/${question.id}`) Cancel
+      input(type="hidden", name='_csrf', value=csrfToken)
+      div.askContainer
+          div.titleContainer
+            if titleErrr
+              label(for="title") Title
+              p Be specific and imagine you're asking a question to another person
+              p.error=titleErrr
+              div.titleText
+                input.redBorder(type="text", name='title', value=question.title)
+            else
+              label(for="title") Title
+              p Be specific and imagine you're asking a question to another person
+              div.titleText
+                input(type="text", name='title', value=question.title)
+          div.descriptionContainer
+            if descriptionErrr
+              label(for="description") Description
+              p Include all the information someone would need to answer your question
+              p.error=descriptionErrr
+              div.descriptionText
+                textarea.redBorder(name='description')=question.description
+            else
+              label(for="description") Description
+              p Include all the information someone would need to answer your question
+              div.descriptionText
+                textarea(name='description')=question.description
+            button(type="submit") Update your question
+            a(href=`/questions/${question.id}`) Cancel

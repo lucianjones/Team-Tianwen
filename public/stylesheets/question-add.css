@@ -1,0 +1,64 @@
+.askContainer {
+  display:flex;
+  justify-content: flex-start;
+  margin-left: 10%;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+.titleContainer {
+  font-weight: bold;
+}
+
+.titleContainer p {
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.descriptionContainer {
+  font-weight: bold;
+}
+
+.descriptionContainer p {
+  font-weight: normal;
+  font-size: 13px;
+}
+.titleText {
+ margin-bottom: 15px;
+}
+
+.titleText input {
+  width: 60%;
+  height: 40px;
+  font-size: 18px;
+}
+
+.descriptionText textarea {
+  width: 60%;
+  height: 200px;
+}
+
+.postButtons{
+  margin-left: 10%;
+  margin-top: 25px;
+}
+
+button {
+  margin-right: 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: .8em;
+  text-decoration: none;
+  background-color: #0095ff;
+  color: #fff;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, .4);
+}
+
+.error{
+  color:red;
+}
+
+.redBorder{
+  border: 1px solid red;
+}

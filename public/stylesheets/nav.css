@@ -1,0 +1,78 @@
+.navbar{
+  background-color: #fafafb;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  position: sticky ;
+  top: 0px;
+   z-index: 1;
+  list-style: none;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 6px solid #0095ff;
+}
+.navbar a {
+  float:left;
+  color: black;
+  padding: 14px 16px;
+  background-color: #fafafb;
+  text-decoration: none;
+  border-radius: 1000px;
+}
+.navbar--right a.signup:hover {
+  background-color: #0064bd;
+}
+.navbar--right a.login:hover {
+  background-color: #b3d3ea;
+}
+.searchbar{
+  width:60%;
+  height:39px;
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 100%;
+}
+.navbar--right .login{
+  margin-right: 10px;
+  background-color: #e1ecf4;
+  color: #39739d;
+  border: 1px solid #7aa7c7;
+  padding: .8em;
+  font-size: 13px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+.navbar--right .signup{
+  background-color: #0095ff;
+  color: #ffffff;
+  border: 1px solid #d6d9dc;
+  font-size: 13px;
+  padding: .8em;
+  margin-top: 10px;
+  margin-left: 4px;
+  border-radius: 3px;
+}
+
+.navbar--right{
+  float:right;
+  background-color: #fafafb;
+}
+
+.profilePic {
+  padding: .8em;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+
+@media screen and (max-width: 710px) {
+  .navbar {
+    margin: auto;
+    display: block;
+  }
+  a.logo{
+    display: none;
+  }
+  .searchbar {
+    margin-left: 10px;
+  }
+}
