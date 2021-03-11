@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 button.removeAttribute('hidden')
                 answer.contentEditable = false
                 const description = answer.innerText;
-                console.log(answer.questionid)
+                console.log(description)
                 editAnswer(`/questions/${answer.dataset.questionid}/answer/${answer.dataset.answerid}/edit`, { description, _csrf: token.content });
             })
         })
