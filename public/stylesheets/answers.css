@@ -1,0 +1,76 @@
+.answers-div {
+    margin: 30px 120px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.answers-li {
+    list-style-type: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#text-box {
+    width: 600px;
+    height: 100px;
+}
+
+#answer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#answer-submit {
+    width: 80px;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: none;
+    text-align: justify;
+    background-color: white;
+    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
+    border-radius: 5%;
+    border: none;
+}
+
+.edit-button {
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: none;
+    text-align: justify;
+    background-color: white;
+    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
+    border-radius: 5%;
+    border: none;
+}
+
+.delete-button {
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: none;
+    text-align: justify;
+    background-color: white;
+    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
+    border-radius: 5%;
+    border: none;
+}
+
+.save {
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: none;
+    text-align: justify;
+    background-color: white;
+    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
+    border-radius: 5%;
+    border: none;
+}

@@ -2,6 +2,7 @@ extends layout
 append head
   script(src="/javascripts/editAnswer.js" type="module")
   link(rel="stylesheet" href="/stylesheets/question-detail-page.css")
+  link(rel="stylesheet" href="/stylesheets/answers.css")
 block content
   div.heading-container
     h3.header= question.title
@@ -14,23 +15,24 @@ block content
         a.edit-btn(href=`/questions/${question.id}/edit`) Edit
         a.edit-btn( href=`/questions/${question.id}/delete`) Delete
         //- make buttons unavaiable if the question does not belong to user
-    h4 Answers
+  div(class='answers-div') Answers 
+    meta(name='csrf-token' content=csrfToken)
+    if answers
+      each answer in answers
+        div(id=`div${answers.indexOf(answer)}` class='answers-list')
+          li(id=`answer${answers.indexOf(answer)}` class='answers-li' contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
+          if user && answer.userId === user.id
+            button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
+            button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
+            hr
+    h4 Your Answer
       div
-        form(method="post" action=`/questions/${question.id}/answer`)
+        form(method="post" action=`/questions/${question.id}/answer` id='answer-form')
           input(type="hidden", name='_csrf', value=csrfToken)
           label(for="description")
-          input(type="text" name="description")
-          button(type="submit") submit
+          textarea(name="description" id='text-box')
+          button(type="submit" id='answer-submit') submit
       div
       if errors
         each error in errors
           li=error
-      div
-        meta(name='csrf-token' content=csrfToken)
-        if answers
-          each answer in answers
-            div(id=`div${answers.indexOf(answer)}`)
-              li(id=`answer${answers.indexOf(answer)}` contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
-              if user && answer.userId === user.id
-                button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
-                button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
