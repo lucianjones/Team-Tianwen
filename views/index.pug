@@ -7,5 +7,15 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= title
-  p Welcome to your Project Skeleton
+  div(id='main-div')
+    div(id="title-div")
+      h1= title
+      img(src="../blackbox.png", alt="" id='logo')
+    div(id='welc-text') Welcome to the greatest coding resource!
+    div(id='welc-text-child') A place to ask and answer coding related questions.
+    div(id='signlog')
+      a(href="/users/register" id='signup') Sign Up 
+      a(href="/users/login" id='login') Login 
+    a(href="/questions" id='questions') Questions  
+
+    div(id='about')
