@@ -1,0 +1,20 @@
+extends layout
+append head
+  script(src="/javascripts/showMore.js" type='module')
+  link(rel="stylesheet" href="/stylesheets/question-page.css")
+block content
+  div.entirePage
+    div.center__container
+      h1.header(scope='col') All Questions
+      div.questionButton
+        if(authenticated)
+          a.question-btn(href="/questions/ask" role='button') Ask Question
+        else
+          a.question-btn(href="/users/login") login to ask questions
+    div.container
+      each result in results
+        div.question-div
+          a.question(href=`/questions/${result.dataValues.id}`)=result.dataValues.title
+          p.description=result.dataValues.description
+  div.showButton-container
+    button.showMore(type="submit") Show More

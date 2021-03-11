@@ -5,11 +5,14 @@ html
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/nav.css')
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous")
+        script(src="/javascripts/search.js" type="module")
   body
     div.navbar
       a.logo(href='/questions') QueueFloodLogo
       //- still need to put picture for logo
-      input(type="text" class='searchbar' placeholder="Search..")
+      input#search-input(type="text" class='searchbar' placeholder="Search..")
+      button#search-btn(type="submit"): i(class=" fas fa-search")
       if(authenticated)
         div.navbar--right
           a.profilePic(href='/users') profilePic
