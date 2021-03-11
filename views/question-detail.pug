@@ -1,8 +1,10 @@
 extends layout
 append head
   script(src="/javascripts/editAnswer.js" type="module")
+  script(src="/javascripts/vote.js" type="module")
   link(rel="stylesheet" href="/stylesheets/question-detail-page.css")
   link(rel="stylesheet" href="/stylesheets/answers.css")
+
 block content
   div.heading-container
     h3.header= question.title
@@ -15,12 +17,19 @@ block content
         a.edit-btn(href=`/questions/${question.id}/edit`) Edit
         a.edit-btn( href=`/questions/${question.id}/delete`) Delete
         //- make buttons unavaiable if the question does not belong to user
-  div(class='answers-div') Answers 
+  div(class='answers-div') Answers
+    hr
     meta(name='csrf-token' content=csrfToken)
     if answers
       each answer in answers
         div(id=`div${answers.indexOf(answer)}` class='answers-list')
-          li(id=`answer${answers.indexOf(answer)}` class='answers-li' contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
+          div.score-container
+            div.score-display
+              span.score 0
+              div.vote
+              button.downVote(id=`downvote-${answer.id}`) downvote
+              button.upVote(id=`upvote-${answer.id}`) upvote
+              li(id=`answer${answers.indexOf(answer)}` class='answers-li' contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
           if user && answer.userId === user.id
             button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
             button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete

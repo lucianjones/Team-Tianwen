@@ -2,6 +2,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 
 const db = require('../db/models');
+const vote = require('../db/models/vote');
 const { csrfProtection, asyncHandler } = require('../utils');
 
 const router = express.Router();
@@ -257,6 +258,23 @@ router.delete('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, re
   await answer.destroy();
   res.json({ message: 'success' })
 }))
+
+
+router.patch('/answer/:id(\\d+)/upvote', asyncHandler(async (req,res) => {
+  answer.score += 1;
+
+  res.json({score: answer.score });
+
+}))
+
+router.patch('/answer/:id(\\d+)/downvote', asyncHandler(async (req,res) => {
+  res.json({score: 2 });
+
+
+
+}))
+
+
 
 
 module.exports = router;
