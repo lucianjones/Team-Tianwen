@@ -260,18 +260,44 @@ router.delete('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, re
 }))
 
 
+
+
+
+
 router.patch('/answer/:id(\\d+)/upvote', asyncHandler(async (req,res) => {
-  answer.score += 1;
+  const id = parseInt(req.params.id, 10);
+  const answer = await db.Answer.findByPk(id);
 
-  res.json({score: answer.score });
+  
 
+  const vote = db.Vote.build({
+    isVote: true,
+    userId: req.session.auth.userId,
+    answerId: id,
+  })
+
+
+
+  await vote.save();
+  res.json({message: 'vote created'});
 }))
 
 router.patch('/answer/:id(\\d+)/downvote', asyncHandler(async (req,res) => {
-  res.json({score: 2 });
+  const id = parseInt(req.params.id, 10);
+  const answer = await db.Answer.findByPk(id);
+
+
+  const vote = db.Vote.build({
+    isVote: false,
+    userId: req.session.auth.userId,
+    answerId: id,
+  })
 
 
 
+  
+  await vote.save();
+  res.json({ message: 'vote created' });
 }))
 
 

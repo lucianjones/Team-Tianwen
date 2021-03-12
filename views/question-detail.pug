@@ -25,7 +25,7 @@ block content
         div(id=`div${answers.indexOf(answer)}` class='answers-list')
           div.score-container
             div.score-display
-              span.score 0
+              span.score(id=`score-${answer.id}`) 0
               div.vote
               button.downVote(id=`downvote-${answer.id}`) downvote
               button.upVote(id=`upvote-${answer.id}`) upvote
