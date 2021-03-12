@@ -10,6 +10,7 @@ const { sequelize } = require('./db/models');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const questionRouter = require('./routes/questions')
+const searchRouter = require('./routes/search')
 const { requireAuth, restore } = require('./auth')
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(restore)
 store.sync();
 
 app.use(restore)
+app.use(searchRouter)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/questions', questionRouter);
