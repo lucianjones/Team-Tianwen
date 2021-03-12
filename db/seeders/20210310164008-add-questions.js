@@ -145,7 +145,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },{
-        title: "How to find event listeners on a DOM node when debugging or from the JavaScript code?",
+        title: "event listeners on a DOM node when debugging or from the JavaScript code?",
         description: "I have a page where some event listeners are attached to input boxes and select boxes. Is there a way to find out which event listeners are observing a particular DOM node and for what event? Events are attached using: Prototype's Event.observe; DOM's addEventListener; As element attribute element.onclick.",
         userId: 5,
         createdAt: new Date(),
