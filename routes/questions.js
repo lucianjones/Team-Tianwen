@@ -2,6 +2,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 
 const db = require('../db/models');
+const vote = require('../db/models/vote');
 const { csrfProtection, asyncHandler } = require('../utils');
 
 const router = express.Router();
@@ -19,7 +20,8 @@ router.get('/', asyncHandler(async(req, res) => {
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const question = await db.Question.findByPk(questionId);
-  const answers = await db.Answer.findAll({where: {questionId}, order: ['createdAt']})
+  const answers = await db.Answer.findAll({where: {questionId}, order: ['createdAt'], include: db.Vote});
+
   res.render('question-detail', {question, answers,  csrfToken: req.csrfToken()})
 }))
 
@@ -258,5 +260,63 @@ router.delete('/:qid(\\d+)/answer/:id(\\d+)/delete', asyncHandler(async (req, re
   res.json({ message: 'success' })
 }))
 
+
+
+
+
+
+router.patch('/answer/:id(\\d+)/upvote', asyncHandler(async (req,res) => {
+  const answerId = parseInt(req.params.id, 10);
+  const answer = await db.Answer.findByPk(answerId);
+  const userId = req.session.auth.userId;
+  const voteResult = await db.Vote.findOne({where: {userId: userId, answerId: answerId}})
+
+  if(!voteResult) {
+  const vote = db.Vote.build({
+    isVote: true,
+    userId: userId,
+    answerId: answerId,
+  })
+  await vote.save();
+  res.json({message: 'vote created'});
+  }
+  if(voteResult.dataValues.isVote === true) {
+    await voteResult.destroy();
+    res.json({message: 'vote deleted'})
+  }
+  else
+  {
+  await voteResult.update({isVote: true});
+  res.json({message: 'vote created'});
+}
+
+}))
+
+router.patch('/answer/:id(\\d+)/downvote', asyncHandler(async (req,res) => {
+  const answerId = parseInt(req.params.id, 10);
+  const answer = await db.Answer.findByPk(answerId);
+  const userId = req.session.auth.userId;
+  const voteResult = await db.Vote.findOne({where: {userId: userId, answerId: answerId}})
+
+  if(!voteResult) {
+  const vote = db.Vote.build({
+    isVote: false,
+    userId: userId,
+    answerId: answerId,
+  })
+  await vote.save();
+  res.json({message: 'vote created'});
+  }
+  if(voteResult.dataValues.isVote === false) {
+    await voteResult.destroy();
+    res.json({message: 'vote deleted'})
+  }
+  else
+  {
+  await voteResult.update({isVote: false});
+  res.json({message: 'vote created'});
+}
+
+}))
 
 module.exports = router;

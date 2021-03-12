@@ -1,7 +1,7 @@
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    
+
     const token = document.querySelector('meta[name="csrf-token"]')
     async function editAnswer(url = '', data = {}) {
         console.log(data)
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     })
     const deleteButtons = document.querySelectorAll('.delete-button')
-    
+
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
             const id = Number(button.id.slice(6))
@@ -62,11 +62,4 @@ window.addEventListener('DOMContentLoaded', () => {
             div.remove();
         })
     })
-
-
-
-
-
-
-
 })
