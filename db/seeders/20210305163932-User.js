@@ -54,6 +54,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        username: 'demo',
+        hashedPassword: await bcrypt.hash('Pass1', 10),
+        email: 'demo@gamil.com',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
 
   },
