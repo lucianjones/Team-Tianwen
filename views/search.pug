@@ -16,5 +16,9 @@ block content
         div.question-div
           a.question(href=`/questions/${result.dataValues.id}`)=result.dataValues.title
           p.description=result.dataValues.description
+      each res in nextResult
+        div.question-div
+          a.qquestion(href=`/questions/${res.dataValues.id}`)=res.dataValues.title
+          p.description=res.dataValues.description
   div.showButton-container
     button.showMore(type="submit") Show More
