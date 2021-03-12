@@ -20,10 +20,17 @@ router.get('/search', asyncHandler(async(req, res) => {
   const results = await db.Question.findAll({
     where: {
       [Op.or]: searchTerms
-    }
+    },
+    limit: 10
+  })
+  const nextResult = await db.Question.findAll({
+    where: {
+      [Op.or]: searchTerms
+    },
+    offset: 10
   })
   console.log(results)
-  res.render('search', { results: results })
+  res.render('search', { results: results, nextResult })
 }))
 
 // router.post('/search', asyncHandler(async(req, res) => {

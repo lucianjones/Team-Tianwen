@@ -25,7 +25,5 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         container.style.height = '100%'
       }
-
     })
-
 })
