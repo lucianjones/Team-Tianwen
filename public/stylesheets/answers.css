@@ -75,3 +75,7 @@ h4 {
     border-radius: 5%;
     border: none;
 }
+
+.highlight {
+    background-color: rgba(35, 54, 223, 0.616);
+}
