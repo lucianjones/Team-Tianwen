@@ -8,18 +8,19 @@ html
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous")
   body
     div.navbar
-      a.logo(href='/questions') QueueFloodLogo
-      //- still need to put picture for logo
+      a(href='/questions')
+        img.mainLogo(src='/img/queueflood.png')
       form(method="GET" action='/search')
         input#search-input(type="text" class='searchbar' name="search" placeholder="Search..")
         button#search-btn(type="submit"): i(class=" fas fa-search")
       if(authenticated)
         div.navbar--right
-          a.profilePic(href='/users') profilePic
-          //- when we have user page finished, have to include into the href
+          form(action="/users/logout" method='POST')   
+            button(type='submit' id='logout') logout 
+          img.defaultPhoto(src="/img/default-profile-photo.jpg")
       else
         div.navbar--right
-          a.login(href='/users/login') login
+          a.login(href='../users/login') login
           a.signup(href='/users/register') signup
 
     block content

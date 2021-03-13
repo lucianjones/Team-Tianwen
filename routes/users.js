@@ -36,7 +36,7 @@ router.post('/register', csrfProtection, userValidator, asyncHandler(async (req,
     user.hashedPassword = hashedPassword;
     await user.save();
     login(req,res,user)
-    res.redirect('/user/:id');
+    // res.redirect('/questions');
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('user-register', {
@@ -89,10 +89,10 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 }));
 
 
-router.post('/logout', (req,res) => {
-  logout(req,res);
-  res.redirect('/users/login');
-});
+router.post('/logout', asyncHandler( async (req,res) => {
+  await logout(req,res);
+  res.redirect('/');
+}));
 
 
 module.exports = router;

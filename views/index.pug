@@ -1,21 +1,22 @@
-extends layout
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/stylesheets/index.css")
+    script(src="/javascripts/index.js" type="module" defer)
+    title Document
+  body 
+    div(id='main-div')
+      div(id="title-div")
+        img(src="/img/logo.png", alt="" id='logo')
+        h1= title
+      div(id='welc-text') Welcome to the greatest coding resource!
+      div(id='welc-text-child') A place to ask and answer coding related questions.
+      div(id='signlog')
+        a(href="/users/register" id='signup') Sign Up 
+        a(href="/users/login" id='login') Login 
+      a(href="/questions" id='questions') Questions  
 
-append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
-
-block content
-  div(id='main-div')
-    div(id="title-div")
-      h1= title
-      img(src="../blackbox.png", alt="" id='logo')
-    div(id='welc-text') Welcome to the greatest coding resource!
-    div(id='welc-text-child') A place to ask and answer coding related questions.
-    div(id='signlog')
-      a(href="/users/register" id='signup') Sign Up 
-      a(href="/users/login" id='login') Login 
-    a(href="/questions" id='questions') Questions  
-
-    div(id='about')
+      div(id='about')
