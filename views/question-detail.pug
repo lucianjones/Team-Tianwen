@@ -13,16 +13,18 @@ block content
   div.question-div
     p.description= question.description
     .center
-      .editbuttons
-        a.edit-btn(href=`/questions/${question.id}/edit`) Edit
-        a.edit-btn( href=`/questions/${question.id}/delete`) Delete
-        //- make buttons unavaiable if the question does not belong to user
+      if user && question.userId === user.id 
+        .editbuttons
+          a.edit-btn(href=`/questions/${question.id}/edit`) Edit
+          a.edit-btn( href=`/questions/${question.id}/delete`) Delete
+          //- make buttons unavaiable if the question does not belong to user
   div(class='answers-div') Answers
     hr
     meta(name='csrf-token' content=csrfToken)
     if answers
       each answer in answers
         div(id=`div${answers.indexOf(answer)}` class='answers-list')
+          li(id=`answer${answers.indexOf(answer)}` class='answers-li' contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
           div.score-container
             - var count=0
                 each vote in answer.Votes
@@ -30,26 +32,25 @@ block content
                     - count = count + 1
                   if vote.isVote === false
                     - count = count - 1
-            div.score-display
-              span.score(id=`score-${answer.id}`) #{count}
-              div.vote
+          div.score-display
+            span.score(id=`score-${answer.id}`) #{count}
+            div.vote
+            if authenticated
+              if answer.Votes.length === 0
+                button.upVote(id=`upvote-${answer.id}`) upvote 
+                button.downVote(id=`downvote-${answer.id}`) downvote
+            each vote in answer.Votes
               if authenticated
-                if answer.Votes.length === 0
-                  button.downVote(id=`downvote-${answer.id}`) downvote
-                  button.upVote(id=`upvote-${answer.id}`) upvote
-              each vote in answer.Votes
-                if authenticated
-                  if vote.userId === user.id
-                    if vote.isVote === true
-                      button.downVote(id=`downvote-${answer.id}`) downvote
-                      button.upVote(id=`upvote-${answer.id}` class='highlight') upvote
-                    if vote.isVote === false
-                      button.downVote(id=`downvote-${answer.id}` class='highlight') downvote
-                      button.upVote(id=`upvote-${answer.id}`) upvote
-                  if vote.userId !== user.id
-                    button.downVote(id=`downvote-${answer.id}`) downvote
-                    button.upVote(id=`upvote-${answer.id}`) upvote
-              li(id=`answer${answers.indexOf(answer)}` class='answers-li' contenteditable='false' data-questionid=answer.questionId data-answerid=answer.id)= answer.description
+                if vote.userId === user.id
+                  if vote.isVote === true
+                    button.upVote(id=`upvote-${answer.id}` class='highlight') upvote
+                    button.downVote(id=`downvote-${answer.id}`) downvote 
+                  if vote.isVote === false
+                    button.upVote(id=`upvote-${answer.id}`) upvote 
+                    button.downVote(id=`downvote-${answer.id}` class='highlight') downvote
+                if vote.userId !== user.id
+                  button.upVote(id=`upvote-${answer.id}`) upvote 
+                  button.downVote(id=`downvote-${answer.id}`) downvote 
           if user && answer.userId === user.id
             button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
             button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete

@@ -6,7 +6,7 @@ body {
 #main-div {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 6fr 1fr 1fr 1fr 1fr 3fr ;
+    grid-template-rows: 6fr 1fr 1fr 1fr .7fr 3fr ;
     height: 100%;
     top: 100px;
     position: relative;
@@ -58,6 +58,14 @@ h1 {
     grid-row-start: 5;
     justify-self: center;
     text-align: center;
+    background-color: #e1ecf4;
+    color: #39739d;
+    border: 1px solid #7aa7c7;
+    padding: .8em;
+    font-size: 13px;
+    padding-top: 12px;
+    text-decoration: none;
+    border-radius: 3px;
 }
 
 #about {
@@ -68,33 +76,36 @@ h1 {
 
 #signup{
     margin-right: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 17px;
+    padding-left: 17px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
     text-decoration: none;
-    text-align: justify;
-    background-color: white;
-    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
-    border-radius: 5%;
+    background-color: #0095ff;
+    color: #fff;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, .4);
 }
 
 #login {
     margin-left: 20 px;
     padding-right: 20px;
     padding-left: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
     text-decoration: none;
-    text-align: justify;
-    background-color: white;
-    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
-    border-radius: 5%;
+    background-color: #0095ff;
+    color: #fff;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, .4);
 }
 
-#questions {
-    text-decoration: none;
-    text-align: justify;
-    background-color: white;
-    box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05);
-    border-radius: 5%;
-    align-self: center;
-    padding-right: 20px;
-    padding-left: 20px;
+#signup:hover, #login:hover {
+    background-color: #0064bd;
+}
+
+#questions:hover {
+    background-color: #b3d3ea;
 }
