@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
        score.innerHTML = scoreHtml + 1;
     }
     else if (up.classList.contains('highlight')) {
-      score.innerHTML = scoreHtml - 1;
+      score.innerHTML = scoreHtml - 2;
       up.classList.remove('highlight');
       button.classList.add('highlight')
     } else {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         button.classList.remove('highlight')
       }
       else if (down.classList.contains('highlight')) {
-        score.innerHTML = scoreHtml + 1;
+        score.innerHTML = scoreHtml + 2;
         down.classList.remove('highlight');
         button.classList.add('highlight')
       }

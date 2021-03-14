@@ -35,22 +35,22 @@ block content
           div.score-display
             span.score(id=`score-${answer.id}`) #{count}
             div.vote
-            if authenticated
-              if answer.Votes.length === 0
-                button.upVote(id=`upvote-${answer.id}`) upvote 
-                button.downVote(id=`downvote-${answer.id}`) downvote
+            - var voteButton=false
             each vote in answer.Votes
               if authenticated
-                if vote.userId === user.id
+                if vote.userId === user.id && voteButton === false
                   if vote.isVote === true
                     button.upVote(id=`upvote-${answer.id}` class='highlight') upvote
                     button.downVote(id=`downvote-${answer.id}`) downvote 
-                  if vote.isVote === false
+                    - voteButton=true
+                  if vote.isVote === false && voteButton === false
                     button.upVote(id=`upvote-${answer.id}`) upvote 
                     button.downVote(id=`downvote-${answer.id}` class='highlight') downvote
-                if vote.userId !== user.id
-                  button.upVote(id=`upvote-${answer.id}`) upvote 
-                  button.downVote(id=`downvote-${answer.id}`) downvote 
+                    - voteButton=true
+            if authenticated
+              if voteButton === false
+                button.upVote(id=`upvote-${answer.id}`) upvote 
+                button.downVote(id=`downvote-${answer.id}`) downvote 
           if user && answer.userId === user.id
             button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
             button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete

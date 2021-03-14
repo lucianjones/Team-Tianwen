@@ -67,13 +67,6 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        description: "document.getElementById('MyElement').classList.remove('MyClass');",
-        userId: 2,
-        questionId:5,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
         description: "Use new Date() to generate a new Date object containing the current date and time.",
         userId: 5,
         questionId: 6,
