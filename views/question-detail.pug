@@ -9,11 +9,14 @@ block content
   div.heading-container
     h3.header= question.title
     div.questionButton
-      a.question-btn(href="/questions/ask" role='button') Ask Question
+      if (authenticated)
+        a.question-btn(href="/questions/ask" role='button') Ask Question
+      else
+        a.question-btn(href="/users/login" role='button') Login to ask a question
   div.question-div
     p.description= question.description
     .center
-      if user && question.userId === user.id 
+      if user && question.userId === user.id
         .editbuttons
           a.edit-btn(href=`/questions/${question.id}/edit`) Edit
           a.edit-btn( href=`/questions/${question.id}/delete`) Delete
@@ -41,16 +44,16 @@ block content
                 if vote.userId === user.id && voteButton === false
                   if vote.isVote === true
                     button.upVote(id=`upvote-${answer.id}` class='highlight') upvote
-                    button.downVote(id=`downvote-${answer.id}`) downvote 
+                    button.downVote(id=`downvote-${answer.id}`) downvote
                     - voteButton=true
                   if vote.isVote === false && voteButton === false
-                    button.upVote(id=`upvote-${answer.id}`) upvote 
+                    button.upVote(id=`upvote-${answer.id}`) upvote
                     button.downVote(id=`downvote-${answer.id}` class='highlight') downvote
                     - voteButton=true
             if authenticated
               if voteButton === false
-                button.upVote(id=`upvote-${answer.id}`) upvote 
-                button.downVote(id=`downvote-${answer.id}`) downvote 
+                button.upVote(id=`upvote-${answer.id}`) upvote
+                button.downVote(id=`downvote-${answer.id}`) downvote
           if user && answer.userId === user.id
             button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
             button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
