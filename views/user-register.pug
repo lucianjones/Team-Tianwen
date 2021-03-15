@@ -1,28 +1,43 @@
 extends layout
-append head 
+append head
   link(rel="stylesheet" href="/stylesheets/user-register.css")
 block content
   div(id="outer-div")
-    div(id='register-errors')
-      if errors
-        each error in errors
-          li(class='errors-li')=error
     div(id='register-main-div')
       ul(id='register-list') Signup for Queueflood
-        li(class='register-list__item') Get all your coding problems answered 
-        li(class='register-list__item') Vote on the best answers 
-        li(class='register-list__item') Fill out your very own user page  
+        li(class='register-list__item') Get all your coding problems answered
+        li(class='register-list__item') Vote on the best answers
+        li(class='register-list__item') Fill out your very own user page
       form(action="/users/register", method="post" id='user-register__form')
           input(type="hidden", name='_csrf', value=csrfToken)
-          label(for="username" class='register-labels') Username
-          input(type="text", name='username' class='register-inputs', value=user.username)
-          label(for="email" class='register-labels') Email
-          input(type="email", name='email' class='register-inputs', value=user.email)
-          label(for="password" class='register-labels') Password
-          input(type="password", name='password' class='register-inputs')
-          label(for="confirmPassword" class='register-labels') Confirm Password
-          input(type='password', name='confirmPassword' class='register-inputs')
+          if usernameErr
+            label(for="username" class='register-labels') Username
+            input(type="text", name='username' class='register-inputs-err', value=user.username)
+            p.errormsg=usernameErr
+          else
+            label(for="username" class='register-labels') Username
+            input(type="text", name='username' class='register-inputs', value=user.username)
+          if emailErr
+            label(for="email" class='register-labels') Email
+            input(type="email", name='email' class='register-inputs-err', value=user.email)
+            p.errormsg=emailErr
+          else
+            label(for="email" class='register-labels') Email
+            input(type="email", name='email' class='register-inputs', value=user.email)
+          if passwordErr
+            label(for="password" class='register-labels') Password
+            input(type="password", name='password' class='register-inputs-err')
+            p.errormsg=passwordErr
+          else
+            label(for="password" class='register-labels') Password
+            input(type="password", name='password' class='register-inputs')
+          if confirmPasswordErr
+            label(for="confirmPassword" class='register-labels') Confirm Password
+            input(type='password', name='confirmPassword' class='register-inputs-err')
+            p.errormsg=confirmPasswordErr
+          else
+            label(for="confirmPassword" class='register-labels') Confirm Password
+            input(type='password', name='confirmPassword' class='register-inputs')
           button(type="submit" id='register-button') Submit
       div(id="login") Already have an account?
-        a(href="/users/login")  Log in 
-
+        a(href="/users/login")  Log in
