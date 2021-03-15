@@ -34,7 +34,7 @@ body {
     padding: 30px;
     box-shadow: 0px 0px 60px 32px rgba(0,0,0, .05) ;
     margin-left: 30px;
-    
+
 }
 
 .register-labels {
@@ -58,10 +58,10 @@ body {
     margin-right: 30px;
     font-size: 35px;
     list-style-type: none;
-    
+
 }
 
-.register-list__item { 
+.register-list__item {
     font-size: 12px;
     padding-top: 12px;
 }
@@ -92,4 +92,13 @@ body {
     font-size: 12px;
     text-decoration: none;
     color:#52b7f2;
+}
+
+.errormsg {
+    color: red;
+    font-size: 10px;
+}
+
+.register-inputs-err{
+    border: 1px solid red;
 }

@@ -38,11 +38,32 @@ router.post('/register', csrfProtection, userValidator, asyncHandler(async (req,
     login(req,res,user)
     // res.redirect('/questions');
   } else {
-    const errors = validatorErrors.array().map((error) => error.msg);
+    const errors = validatorErrors.array().map((error) => error.param);
+    if (errors.includes("username")) {
+      const usernameError = errors.indexOf('username');
+      var usernameErr = validatorErrors.array()[usernameError].msg
+    }
+    if (errors.includes("email")) {
+      const emailError = errors.indexOf('email');
+      var emailErr = validatorErrors.array()[emailError].msg
+    }
+    if (errors.includes("password")) {
+      const passwordError = errors.indexOf('password');
+      var passwordErr = validatorErrors.array()[passwordError].msg
+    }
+    if (errors.includes("confirmPassword")) {
+      const confirmPasswordError = errors.indexOf('confirmPassword');
+      var confirmPasswordErr = validatorErrors.array()[confirmPasswordError].msg
+    }
+
     res.render('user-register', {
       title: 'Register',
       user,
       errors,
+      confirmPasswordErr,
+      passwordErr,
+      emailErr,
+      usernameErr,
       csrfToken: req.csrfToken()
     })
   }
@@ -77,13 +98,23 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 
     errors.push('Login failed for the provided email address and password');
   } else {
-    errors = validatorErrors.array().map((error) => error.msg);
+    errors = validatorErrors.array().map((error) => error.param);
+    if (errors.includes("email")) {
+      const emailError = errors.indexOf('email');
+      var emailErrr = validatorErrors.array()[emailError].msg
+    }
+    if (errors.includes("password")) {
+      const passwordError = errors.indexOf('password');
+      var passwordErrr = validatorErrors.array()[passwordError].msg
+    }
   }
 
   res.render('user-login', {
     title: 'Login',
     email,
     errors,
+    emailErrr,
+    passwordErrr,
     csrfToken: req.csrfToken(),
   });
 }));
