@@ -58,13 +58,14 @@ block content
             button(type="submit" id=`${answers.indexOf(answer)}` class='edit-button') edit
             button(type="submit" id=`delete${answers.indexOf(answer)}` class='delete-button') delete
             hr
-    h4 Your Answer
-      div
-        form(method="post" action=`/questions/${question.id}/answer` id='answer-form')
-          input(type="hidden", name='_csrf', value=csrfToken)
-          label(for="description")
-          textarea(name="description" id='text-box')
-          button(type="submit" id='answer-submit') submit
+    if authenticated 
+      h4 Your Answer
+        div
+          form(method="post" action=`/questions/${question.id}/answer` id='answer-form')
+            input(type="hidden", name='_csrf', value=csrfToken)
+            label(for="description")
+            textarea(name="description" id='text-box')
+            button(type="submit" id='answer-submit') submit
       div
       if errors
         each error in errors
