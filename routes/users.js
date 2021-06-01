@@ -125,5 +125,13 @@ router.post('/logout', asyncHandler( async (req,res) => {
   res.redirect('/');
 }));
 
+router.get('/demo', asyncHandler( async (req,res) => {
+  const email = 'demo@gamil.com'
+  const user = await db.User.findOne({ where: { email }})
+  login(req,res,user)
+  return
+
+}))
+
 
 module.exports = router;
