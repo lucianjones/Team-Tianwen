@@ -51,7 +51,7 @@ h1 {
     justify-self: center;
     text-align: center;
     align-items: center;
-    
+
 }
 
 #questions {
@@ -126,4 +126,14 @@ h1 {
 
 #demo:hover {
     background-color: #0064bd;
+}
+
+.info__links {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.info__links--contributer {
+
 }
