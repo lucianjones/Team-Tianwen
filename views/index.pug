@@ -5,6 +5,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="/stylesheets/index.css")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous")
     script(src="/javascripts/index.js" type="module" defer)
     title Queueflood
   body
@@ -15,11 +16,25 @@ html(lang="en")
       div(id='welc-text') Welcome to the greatest coding resource!
       div(id='welc-text-child') A place to ask and answer coding related questions.
       div(id='signlog')
-
-        a(href="/users/register" id='signup') Sign Up 
-        a(href="/users/login" id='login') Login 
-        a(href="/users/demo" id="demo") Demo
-      a(href="/questions" id='questions') Questions  
-
-
+        a(href="/users/register" id='signup') Sign Up
+        a(href="/users/login" id='login') Login
+        a(href="/users/demo" id='demo') Demo
+      a(href="/questions" id='questions') Questions
       div(id='about')
+      .info__links
+        .info__links--contributer
+          span Dylan Brooks
+          a(href="https://github.com/dylanbrooks" target="_blank"): i(class="fab fa-github")
+          a(href="https://www.linkedin.com/in/dylan-brooks-662439212/s" target="_blank"): i(class="fab fa-linkedin")
+        .info__links--contributer
+          span Danny Zhou
+          a(href="https://github.com/DZhou005?tab=repositories" target="_blank"): i(class="fab fa-github")
+          a(href="https://www.linkedin.com/in/danny-zhou-718006147/" target="_blank"): i(class="fab fa-linkedin")
+        .info__links--contributer
+          span Lucian Jones
+          a(href="https://github.com/lucianjones" target="_blank"): i(class="fab fa-github")
+          a(href="https://www.linkedin.com/in/lucian-jones-75437720b/" target="_blank"): i(class="fab fa-linkedin")
+        .info__links--contributer
+          span Heriberto Montoya
+          a(href="https://github.com/montoya1256" target="_blank"): i(class="fab fa-github")
+          a(href="https://www.linkedin.com/in/heriberto-montoya-8578731b6/" target="_blank"): i(class="fab fa-linkedin")
