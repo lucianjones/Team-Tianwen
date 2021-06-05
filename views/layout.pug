@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Queueflood"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/nav.css')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous")
@@ -15,8 +15,8 @@ html
         button#search-btn(type="submit"): i(class=" fas fa-search")
       if(authenticated)
         div.navbar--right
-          form(action="/users/logout" method='POST')   
-            button(type='submit' id='logout') logout 
+          form(action="/users/logout" method='POST')
+            button(type='submit' id='logout') logout
           img.defaultPhoto(src="/img/default-profile-photo.jpg")
       else
         div.navbar--right
